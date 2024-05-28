@@ -31,18 +31,22 @@ java -cp $CPATH org.junit.runner.JUnitCore TestListExamples > testresult.txt
 result=$(grep "." testresult.txt |tail -1)
 echo $result
 
-#testNum=3
+#testNum=2
 
 fullCredit="OK (2 tests)"
 halfCredit="Tests run: 2,  Failures: 1"
 error_halfCredit="OK (1 test)"
 
-if [[ $result == $fullCredit ]]
+if [[ "$result" == "$fullCredit" ]]
 then
     echo "Grade:100"
-elif [[ $result == $halfCredit ]] | [[ $result == $error_halfCredit ]]
+elif [[ "$result" == "$halfCredit" ]]
 then
     echo "Grade:50"
+
+elif [[ "$result" == "$error_halfCredit" ]]
+then
+    echo "Grade:50, error occuring on one of the tests"
 else
     echo "Grade:0"
 fi
